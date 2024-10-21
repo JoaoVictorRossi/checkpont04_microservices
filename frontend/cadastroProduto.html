@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Cadastro de Usuário</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="produtoName">Produto</label>
+                <input type="text" class="form-control" id="produtoName" required>
+            </div>
+            <div class="form-group">
+                <label for="precoProduto">Preço</label>
+                <input type="number" class="form-control" id="precoProduto" required>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade em estoque</label>
+                <input type="number" class="form-control" id="quantidade" required>
+            </div>
+            <div class="form-group">
+                <label for="dataCriacao">Data de criação</label>
+                <input type="date" class="form-control" id="dataCriacao" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const produtoName = document.getElementById('produtoName').value;
+            const precoProduto = document.getElementById('precoProduto').value;
+            const quantidade = document.getElementById('quantidade').value;
+            const dataCriacao = document.getElementById('dataCriacao').value;
+
+            const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            produtos.push({ produtoName, precoProduto, quantidade, dataCriacao});
+            localStorage.setItem('produtos', JSON.stringify(produtos));
+
+            alert('Produto cadastrado com sucesso!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
